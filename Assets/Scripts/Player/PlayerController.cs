@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("External GameObjects")]
     private Camera cam;
+    public GameObject rocketLauncher;
 
     [Header("Player Components")]
     private Rigidbody2D rb;
@@ -44,6 +45,10 @@ public class PlayerController : MonoBehaviour
         if (mousePos.x < transform.position.x)
         {
             transform.Rotate(180f, 0f, 0f);
+            rocketLauncher.transform.position = new Vector3(rocketLauncher.transform.position.x, rocketLauncher.transform.position.y, 1f);
+
+        } else {
+            rocketLauncher.transform.position = new Vector3(rocketLauncher.transform.position.x, rocketLauncher.transform.position.y, 1f);
         }
 
         Move();
