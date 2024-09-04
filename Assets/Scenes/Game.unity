@@ -203,7 +203,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.2007356, y: -0.50112, z: 0}
-  m_LocalScale: {x: 2.4164665, y: 2.4164665, z: 2.4164665}
+  m_LocalScale: {x: 1.7970536, y: 1.7970536, z: 1.7970536}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 761557913}
@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f0adc49b63984eaaa31cf922fbf2f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 8
   health: 10
 --- !u!50 &725778806
 Rigidbody2D:
@@ -478,7 +478,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 25
+      scalar: 50
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -530,8 +530,8 @@ ParticleSystem:
         m_RotationOrder: 4
     startColor:
       serializedVersion: 2
-      minMaxState: 0
-      minColor: {r: 1, g: 1, b: 1, a: 1}
+      minMaxState: 2
+      minColor: {r: 0.8, g: 0.003921569, b: 0.17254902, a: 1}
       maxColor: {r: 0.6862745, g: 0.003921569, b: 0.15294118, a: 1}
       maxGradient:
         serializedVersion: 2
@@ -596,7 +596,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 4
+      scalar: 5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -920,7 +920,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.03
+      scalar: 0.04
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -974,7 +974,7 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 25
+    angle: 34.5
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
