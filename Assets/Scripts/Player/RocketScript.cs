@@ -30,6 +30,16 @@ public class RocketScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 1f);
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                if (colliders[i].gameObject.CompareTag("Enemy"))
+                {
+                    colliders[i].gameObject.GetComponent<EnemyScript>().TakeDamage(damage);
+                    colliders[i].gameObject.GetComponent<Rigidbody2D>().AddForce((colliders[i].transform.position - transform.position).normalized * 5f, ForceMode2D.Impulse);
+
+                }
+            }
             DestroySelf();
         }
     }

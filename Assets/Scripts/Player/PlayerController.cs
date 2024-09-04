@@ -65,4 +65,17 @@ public class PlayerController : MonoBehaviour
     void Move() {
         rb.velocity = new Vector2(moveDirection.x * speed, moveDirection.y * speed);
     }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            DestroySelf();
+        }
+    }
+
+    void DestroySelf() {
+        Destroy(gameObject);
+    }
 }
