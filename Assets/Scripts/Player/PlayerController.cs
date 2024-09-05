@@ -14,10 +14,13 @@ public class PlayerController : MonoBehaviour
     [Header("Player Components")]
     private Rigidbody2D rb;
     private SpriteRenderer sr;
+    private Animation anim;
 
     [Header("Player Attributes")]
     public float speed = 5f;
     public float health = 10f;
+
+    private bool canTakeDamage = true;
 
     private Vector2 moveDirection;
     // Start is called before the first frame update
@@ -28,6 +31,7 @@ public class PlayerController : MonoBehaviour
         cam = Camera.main;
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animation>();
     }
 
     void Update()
@@ -68,11 +72,25 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        health -= damage;
-        if (health <= 0)
+        if (canTakeDamage)
         {
-            DestroySelf();
-        }
+			canTakeDamage = false;
+			anim.Play();
+			health -= damage;
+			if (health <= 0)
+			{
+
+				DestroySelf();
+			}
+			Invoke("IFrames", 0.5f);
+
+		}
+        
+    }
+
+    private void IFrames()
+    {
+        canTakeDamage = true;
     }
 
     void DestroySelf() {

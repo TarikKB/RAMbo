@@ -18,12 +18,15 @@ public class EnemyScript : MonoBehaviour
 
     public float speed = 3f;
 
-    private GameObject player; 
+    private GameObject player;
+
+    private Animator anim;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         player = GameObject.Find("Player");
@@ -56,6 +59,7 @@ public class EnemyScript : MonoBehaviour
     }
 
     public void TakeDamage(float damage) {
+        anim.SetTrigger("TakeDamage");
         health -= damage;
         if (health <= 0) {
             DestroySelf();
