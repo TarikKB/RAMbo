@@ -283,6 +283,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9099ae0ed3316b43aedabf8837ff731, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnPoints:
+  - {fileID: 565696478}
+  - {fileID: 1970182105}
+  - {fileID: 1258091039}
+  - {fileID: 173539389}
+  - {fileID: 103495278}
+  - {fileID: 1441793078}
+  - {fileID: 1588148327}
+  - {fileID: 1205282444}
+  - {fileID: 1223787070}
+  - {fileID: 1219683502}
+  - {fileID: 540487232}
+  - {fileID: 739624586}
+  - {fileID: 2011949144}
+  - {fileID: 1012309993}
+  - {fileID: 1857527520}
+  - {fileID: 918238543}
+  - {fileID: 439672958}
+  - {fileID: 902238167}
+  - {fileID: 110229655}
+  - {fileID: 1777316935}
+  - {fileID: 1415941652}
+  - {fileID: 1498516216}
+  - {fileID: 1154768847}
+  - {fileID: 1343063045}
+  bytePrefab: {fileID: 2540306879767770673, guid: 8b63bf11427194281a817350647647ba, type: 3}
+  spawnRate: 1
+  spawnCount: 10
 --- !u!1 &439672958
 GameObject:
   m_ObjectHideFlags: 0

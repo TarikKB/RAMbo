@@ -30,7 +30,7 @@ public class RocketScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 1f);
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 1.5f);
             for (int i = 0; i < colliders.Length; i++)
             {
                 if (colliders[i].gameObject.CompareTag("Enemy"))
