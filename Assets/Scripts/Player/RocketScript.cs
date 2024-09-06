@@ -46,6 +46,7 @@ public class RocketScript : MonoBehaviour
 
     void DestroySelf()
     {
+        Camera.main.GetComponent<CameraShake>().StartShake(0.2f, 0.2f);
         GameObject explosionEffect = Instantiate(explosion, gameObject.transform);
         explosionEffect.transform.parent = null;
         Destroy(gameObject);
