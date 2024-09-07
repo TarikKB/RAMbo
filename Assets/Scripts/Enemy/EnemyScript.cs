@@ -55,6 +55,7 @@ public class EnemyScript : MonoBehaviour
     {
         GameObject tmp = Instantiate(bloodEffect, gameObject.transform);
         tmp.transform.parent = null;
+        ScoreManager.AddScore(10);
         Destroy(gameObject);
     }
 
