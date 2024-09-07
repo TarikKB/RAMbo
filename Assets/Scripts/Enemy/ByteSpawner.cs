@@ -50,7 +50,6 @@ public class ByteSpawner : MonoBehaviour
         float camWidth = camHeight * cam.aspect;
         spawnPoints = SetSpawnpoints(camHeight, camWidth, 4f, 3f);
         SetBounds();
-        print(spawnPoints.Length);
         
     }
 
