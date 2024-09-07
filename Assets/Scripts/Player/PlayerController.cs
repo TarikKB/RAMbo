@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 
@@ -18,7 +20,12 @@ public class PlayerController : MonoBehaviour
 
     [Header("Player Attributes")]
     public float speed = 5f;
-    public float health = 10f;
+    [Header("Player Health")]
+    public int numOfHearts;
+    public Sprite fullHeart;
+    public Sprite emptyHeart;
+    public float health = 6f;
+    public UnityEngine.UI.Image[] hearts;
 
     private bool canTakeDamage = true;
 
@@ -32,6 +39,8 @@ public class PlayerController : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animation>();
+        UpdateHealth();
+        
     }
 
     void Update()
@@ -70,6 +79,30 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(moveDirection.x * speed, moveDirection.y * speed);
     }
 
+    void UpdateHealth() {
+        if (health >= numOfHearts)
+        {
+            health = numOfHearts;
+        }
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            if (i < health) {
+                hearts[i].sprite = fullHeart;
+            } else {
+                hearts[i].sprite = emptyHeart;
+            }
+            if (i < numOfHearts)
+            {
+                hearts[i].enabled = true;
+            }
+            else
+            {
+                hearts[i].enabled = false;
+            }
+        }
+
+    }
+
     public void TakeDamage(float damage)
     {
         if (canTakeDamage)
@@ -83,6 +116,7 @@ public class PlayerController : MonoBehaviour
 				DestroySelf();
 			}
 			Invoke("IFrames", 0.5f);
+            UpdateHealth();
 
 		}
         
