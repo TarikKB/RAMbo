@@ -20,6 +20,7 @@ public class EnemyScript : MonoBehaviour
 
     private GameObject player;
 
+    public bool isFinalByte = false;
     private Animator anim;
 
 
@@ -30,6 +31,7 @@ public class EnemyScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         player = GameObject.Find("Player");
+
 
         if (UnityEngine.Random.Range(0, 2) == 0)
         {
@@ -56,6 +58,7 @@ public class EnemyScript : MonoBehaviour
         GameObject tmp = Instantiate(bloodEffect, gameObject.transform);
         tmp.transform.parent = null;
         ScoreManager.AddScore(10);
+        WaveManager.enemies.Remove(gameObject);
         Destroy(gameObject);
     }
 

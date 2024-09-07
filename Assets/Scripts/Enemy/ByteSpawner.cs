@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Analytics;
 
@@ -14,11 +15,11 @@ public class ByteSpawner : MonoBehaviour
     public GameObject pointPrefab;
 
     public int spawnRate = 1;
-    public int spawnCount = 10;
+    public int spawnCount = 0;
 
-    private bool canSpawn = true;
+    public bool canSpawn = false;
     
-    private int byteCount = 0;
+    public int byteCount = 0;
 
     private Camera cam;
 
@@ -27,14 +28,29 @@ public class ByteSpawner : MonoBehaviour
     public GameObject topBound;
     public GameObject bottomBound;
 
+    private WaveManager waveManager;
     // Start is called before the first frame update
     void Start()
     {
+        waveManager = GetComponent<WaveManager>();
         cam = Camera.main;
         float camHeight = 2f * cam.orthographicSize + 2f;
         float camWidth = camHeight * cam.aspect;
         spawnPoints = SetSpawnpoints(camHeight, camWidth, 4f, 3f);
         SetBounds();
+        
+    }
+
+    public void CamUpdate() {
+        foreach (GameObject point in spawnPoints) {
+            Destroy(point);
+        }
+        cam = Camera.main;
+        float camHeight = 2f * cam.orthographicSize + 2f;
+        float camWidth = camHeight * cam.aspect;
+        spawnPoints = SetSpawnpoints(camHeight, camWidth, 4f, 3f);
+        SetBounds();
+        print(spawnPoints.Length);
         
     }
 
@@ -92,6 +108,7 @@ public class ByteSpawner : MonoBehaviour
 
     public void SpawnByte() {
         int spawnPointIndex = Random.Range(0, spawnPoints.Length);
-        Instantiate(bytePrefab, spawnPoints[spawnPointIndex].transform.position, Quaternion.identity);
+        WaveManager.enemies.Add(Instantiate(bytePrefab, spawnPoints[spawnPointIndex].transform.position, Quaternion.identity));
     }
+
 }
