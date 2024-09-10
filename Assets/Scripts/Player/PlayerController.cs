@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Unity.VisualStudio.Editor;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 
@@ -26,7 +27,9 @@ public class PlayerController : MonoBehaviour
     public Sprite emptyHeart;
     public float health = 6f;
     public UnityEngine.UI.Image[] hearts;
+    public AudioClip playerHit;
 
+    public GameObject deathScreen;
     private bool canTakeDamage = true;
 
     private Vector2 moveDirection;
@@ -107,12 +110,14 @@ public class PlayerController : MonoBehaviour
     {
         if (canTakeDamage)
         {
+            AudioManager.PlaySound(playerHit, transform.position);
 			canTakeDamage = false;
 			anim.Play();
 			health -= damage;
 			if (health <= 0)
 			{
-
+                Time.timeScale = 0.5f;
+                deathScreen.SetActive(true);
 				DestroySelf();
 			}
 			Invoke("IFrames", 0.5f);

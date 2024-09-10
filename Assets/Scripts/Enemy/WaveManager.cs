@@ -60,7 +60,7 @@ public class WaveManager : MonoBehaviour
             StartCoroutine(DestroyMemUp(memUpPrefab));
             player.GetComponent<PlayerController>().speed += 2;
             player.GetComponent<AttackScript>().cooldown -= 0.2f;
-            camEndSize += 3;
+            camEndSize += 2;
             yield return new WaitForSeconds(1f);
             byteSpawner.CamUpdate();
         }

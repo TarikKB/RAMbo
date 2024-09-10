@@ -28,17 +28,16 @@ public class DirectorScript : MonoBehaviour
     {
         if (firstLaunch)
         {
+            openingPanel.SetActive(true);
             player.SetActive(false);
             byteSpawner.SetActive(false);
             fullText = openingText.text;
             StartCoroutine(DisplayLine(fullText));
             
             firstLaunch = false;
-        }
-        else
+        } else
         {
-            //openingText.gameObject.SetActive(false);
-            openingPanel.SetActive(false);
+            StartGame();
         }
         
         
@@ -68,5 +67,17 @@ public class DirectorScript : MonoBehaviour
             }
             yield return new WaitForSeconds(typingSpeed + puncDelay);
         }
+    }
+
+    public void MainMenu()
+    {
+        Time.timeScale = 1;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
+    
+    public void Restart()
+    {
+        Time.timeScale = 1;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
     }
 }
