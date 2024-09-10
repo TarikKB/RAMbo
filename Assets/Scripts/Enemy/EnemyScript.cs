@@ -14,6 +14,8 @@ public class EnemyScript : MonoBehaviour
     private SpriteRenderer sr;
     public float health = 1f;
 
+    public AudioClip byteDead;
+
     public float damage = 1f;
 
     public float speed = 3f;
@@ -55,6 +57,7 @@ public class EnemyScript : MonoBehaviour
 
     void DestroySelf()
     {
+        AudioManager.PlaySound(byteDead, transform.position);
         GameObject tmp = Instantiate(bloodEffect, gameObject.transform);
         tmp.transform.parent = null;
         ScoreManager.AddScore(10);

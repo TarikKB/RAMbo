@@ -9,10 +9,14 @@ public class WaveManager : MonoBehaviour
 
     public bool awaitingWave = false;
 
+    public GameObject memUp;
+
     public static List<GameObject> enemies = new List<GameObject>();
 
     private float camStartSize;
     private float camEndSize;
+
+    public GameObject canvas;
 
     private float t = 0;
 
@@ -52,6 +56,8 @@ public class WaveManager : MonoBehaviour
         byteSpawner.byteCount = 0;
         if (curWave > 1)
         {
+            GameObject memUpPrefab = Instantiate(memUp);
+            StartCoroutine(DestroyMemUp(memUpPrefab));
             player.GetComponent<PlayerController>().speed += 2;
             player.GetComponent<AttackScript>().cooldown -= 0.2f;
             camEndSize += 3;
@@ -65,6 +71,14 @@ public class WaveManager : MonoBehaviour
         curWave++;
         Invoke("WaveDelay", 5f);
     }
+
+    IEnumerator DestroyMemUp(GameObject memUp)
+    {
+        yield return new WaitForSeconds(3f);
+        Destroy(memUp);
+    }
+
+    
 
     private void WaveDelay() {
         awaitingWave = false;
