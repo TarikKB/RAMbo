@@ -408,6 +408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoints: []
   bytePrefab: {fileID: 2540306879767770673, guid: 8b63bf11427194281a817350647647ba, type: 3}
+  megaBytePrefab: {fileID: 2540306879767770673, guid: 7f9e8bb2ebc8ad2468e2c410fa2a5f37, type: 3}
   pointPrefab: {fileID: 5286423141831916213, guid: 2499d43b02da94329891e1d3c615dbd5, type: 3}
   spawnRate: 1
   spawnCount: 0
@@ -429,6 +430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b0e74cf022c44fd3adf390cc31d3010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curWave: 1
   awaitingWave: 0
   memUp: {fileID: 6358053278438597714, guid: 6efc73b0dd67cde4b91b97de2c7d9c32, type: 3}
   canvas: {fileID: 1464191270}

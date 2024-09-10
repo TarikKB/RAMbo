@@ -12,6 +12,8 @@ public class ByteSpawner : MonoBehaviour
 
     public GameObject bytePrefab;
 
+    public GameObject megaBytePrefab;
+
     public GameObject pointPrefab;
 
     public int spawnRate = 1;
@@ -93,10 +95,15 @@ public class ByteSpawner : MonoBehaviour
     {
         
         if (canSpawn && byteCount < spawnCount) {
-                canSpawn = false;
+            
+            canSpawn = false;
+            if (byteCount % 8 == 0 && waveManager.curWave > 2) {
+                SpawnMegaByte();
+            } else {
                 SpawnByte();
-                Invoke("ResetSpawn", spawnRate);
-                byteCount++;
+            }
+            Invoke("ResetSpawn", spawnRate);
+            byteCount++;
         }
         
     }
@@ -108,6 +115,11 @@ public class ByteSpawner : MonoBehaviour
     public void SpawnByte() {
         int spawnPointIndex = Random.Range(0, spawnPoints.Length);
         WaveManager.enemies.Add(Instantiate(bytePrefab, spawnPoints[spawnPointIndex].transform.position, Quaternion.identity));
+    }
+
+    public void SpawnMegaByte() {
+        int spawnPointIndex = Random.Range(0, spawnPoints.Length);
+        WaveManager.enemies.Add(Instantiate(megaBytePrefab, spawnPoints[spawnPointIndex].transform.position, Quaternion.identity));
     }
 
 }

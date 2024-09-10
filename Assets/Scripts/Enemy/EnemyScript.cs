@@ -25,6 +25,8 @@ public class EnemyScript : MonoBehaviour
     public bool isFinalByte = false;
     private Animator anim;
 
+    public int scoreValue = 10;
+
 
     // Start is called before the first frame update
     void Start()

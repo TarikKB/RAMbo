@@ -5,7 +5,7 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour
 {
     private ByteSpawner byteSpawner;
-    private int curWave = 1;
+    public int curWave = 1;
 
     public bool awaitingWave = false;
 
@@ -59,7 +59,8 @@ public class WaveManager : MonoBehaviour
             GameObject memUpPrefab = Instantiate(memUp);
             StartCoroutine(DestroyMemUp(memUpPrefab));
             player.GetComponent<PlayerController>().speed += 2;
-            player.GetComponent<AttackScript>().cooldown -= 0.2f;
+            if (player.GetComponent<AttackScript>().cooldown > 0.2f)
+                player.GetComponent<AttackScript>().cooldown -= 0.2f;
             camEndSize += 2;
             yield return new WaitForSeconds(1f);
             byteSpawner.CamUpdate();
