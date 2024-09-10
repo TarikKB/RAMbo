@@ -35,7 +35,7 @@ public class WaveManager : MonoBehaviour
             StartCoroutine(StartWave());
         }
         if (camStartSize != camEndSize) {
-            t += Time.deltaTime/8 + 0.15f * t;
+            t += Time.deltaTime/16 + 0.15f * t;
             Camera.main.orthographicSize = Mathf.Lerp(camStartSize, camEndSize, t);
             if (Camera.main.orthographicSize == camEndSize) {
                 camStartSize = camEndSize;
@@ -60,7 +60,7 @@ public class WaveManager : MonoBehaviour
         }
         yield return new WaitForSeconds(3f);
         byteSpawner.canSpawn = true;
-        byteSpawner.spawnCount = 10 * curWave + Random.Range(1, 4) * curWave;
+        byteSpawner.spawnCount = 8 * curWave + Random.Range(1, 4) * curWave;
         print("Spawning " + byteSpawner.spawnCount + " enemies");
         curWave++;
         Invoke("WaveDelay", 5f);

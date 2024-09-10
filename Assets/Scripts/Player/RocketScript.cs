@@ -15,6 +15,8 @@ public class RocketScript : MonoBehaviour
 
     public GameObject explosion;
 
+    public AudioClip explosionSound;
+
     
     // Start is called before the first frame update
     void Start()
@@ -46,6 +48,7 @@ public class RocketScript : MonoBehaviour
 
     void DestroySelf()
     {
+        AudioManager.PlaySound(explosionSound, transform.position);
         Camera.main.GetComponent<CameraShake>().StartShake(0.2f, 0.2f);
         GameObject explosionEffect = Instantiate(explosion, gameObject.transform);
         explosionEffect.transform.parent = null;

@@ -104,6 +104,7 @@ MonoBehaviour:
   damage: 1
   lifetime: 1
   explosion: {fileID: 2616322758698598702, guid: 94d4cfdc11a714bee89839a9b90713fd, type: 3}
+  explosionSound: {fileID: 8300000, guid: f7c42574e774d514b8b3069a6ef32084, type: 3}
 --- !u!50 &5560588384480708065
 Rigidbody2D:
   serializedVersion: 4
