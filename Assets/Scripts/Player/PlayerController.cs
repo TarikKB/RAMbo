@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
         dashDist = PlayerPrefs.GetInt("dashLevel", 0);
         speed =  6 + PlayerPrefs.GetInt("speedLevel", 0);
         health = 6 + PlayerPrefs.GetInt("hpLevel", 0);
+        numOfHearts = (int)health;
         
         cam = Camera.main;
         sr = GetComponent<SpriteRenderer>();
@@ -97,22 +98,37 @@ public class PlayerController : MonoBehaviour
     }
 
     void Dash() {
+        if (PlayerPrefs.GetInt("dashLevel", 0) == 0)
+            return;
         GameObject tmp = Instantiate(dashParticles, transform.position, Quaternion.identity);
         tmp.transform.parent = null;
-        if (transform.position.x + moveDirection.x * dashDist > cam.orthographicSize * cam.aspect || transform.position.x + moveDirection.x * dashDist < -(cam.orthographicSize * cam.aspect) || transform.position.y + moveDirection.y * dashDist > cam.orthographicSize || transform.position.y + moveDirection.y * dashDist < -cam.orthographicSize)
+        float dashDirX = 0;
+        float dashDirY = 0;
+        Vector3 mousePos = (Vector2)cam.ScreenToWorldPoint(Input.mousePosition).normalized;
+        if (Mathf.Abs(moveDirection.x) < 0.1f && Mathf.Abs(moveDirection.y) < 0.1f)
+        {
+            
+            dashDirX = mousePos.x;
+            dashDirY = mousePos.y;
+            
+        } else {
+            dashDirX = moveDirection.x;
+            dashDirY = moveDirection.y;
+        }
+        if (transform.position.x + dashDirX * dashDist > cam.orthographicSize * cam.aspect || transform.position.x + dashDirX * dashDist < -(cam.orthographicSize * cam.aspect) || transform.position.y + dashDirY * dashDist > cam.orthographicSize || transform.position.y + dashDirY * dashDist < -cam.orthographicSize)
         {
             float wallDistX = cam.aspect * cam.orthographicSize - Mathf.Abs(transform.position.x);
             float wallDistY = cam.orthographicSize - Mathf.Abs(transform.position.y);
             if (wallDistX < wallDistY)
             {
-                transform.position = new Vector2(transform.position.x + moveDirection.x * wallDistX, transform.position.y + moveDirection.y * dashDist);
+                transform.position = new Vector2(transform.position.x + dashDirX * wallDistX, transform.position.y + dashDirY * dashDist);
                 return;
             } else {
-                transform.position = new Vector2(transform.position.x + moveDirection.x * dashDist, transform.position.y + moveDirection.y * wallDistY);
+                transform.position = new Vector2(transform.position.x + dashDirX * dashDist, transform.position.y + dashDirY * wallDistY);
                 return;
             }
         }
-        transform.position = new Vector2(transform.position.x + moveDirection.x * dashDist, transform.position.y + moveDirection.y * dashDist);
+        transform.position = new Vector2(transform.position.x + dashDirX * dashDist, transform.position.y + dashDirY * dashDist);
 
     }
 

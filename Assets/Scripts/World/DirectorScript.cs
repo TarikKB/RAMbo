@@ -35,6 +35,7 @@ public class DirectorScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameIsPaused = false;
         highScore = PlayerPrefs.GetInt("HighScore", 0);
         if (firstLaunch)
         {
