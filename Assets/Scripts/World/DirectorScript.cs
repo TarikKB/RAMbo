@@ -23,6 +23,10 @@ public class DirectorScript : MonoBehaviour
 
     public static bool firstLaunch = true;
 
+    public static bool gameIsPaused = false;
+
+    public GameObject pauseMenu;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,11 +47,38 @@ public class DirectorScript : MonoBehaviour
         
     }
 
+    public void Pause() {
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0;
+        gameIsPaused = true;
+        
+    }
+
+    public void Resume() {
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1;
+        gameIsPaused = false;
+    }
+
     public void StartGame() {
         player.SetActive(true);
         byteSpawner.SetActive(true);
         Destroy(openingPanel);
         audioManager.StartOpening();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (gameIsPaused)
+            {
+                Resume();
+            } else
+            {
+                Pause();
+            }
+        }
     }
 
     // Update is called once per frame

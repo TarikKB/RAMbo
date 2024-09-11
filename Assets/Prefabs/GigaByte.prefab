@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 798475299742440868}
   - component: {fileID: 2557674659039161890}
   m_Layer: 8
-  m_Name: MegaByte
+  m_Name: GigaByte
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0b75b792a18ff86458789d8681d22178, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fafdd9499738cc24fa5e5a1720593bc4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -103,12 +103,12 @@ MonoBehaviour:
   bloodEffect: {fileID: 2616322758698598702, guid: f97a9041502704bb5a59908ddf8542a5, type: 3}
   byte0Sprite: {fileID: 21300000, guid: 0b75b792a18ff86458789d8681d22178, type: 3}
   byte1Sprite: {fileID: 21300000, guid: 0b75b792a18ff86458789d8681d22178, type: 3}
-  health: 4
+  health: 8
   byteDead: {fileID: 8300000, guid: beba9d7e2f6e0324d8eb632d92d8aea8, type: 3}
-  damage: 2
-  speed: 2
+  damage: 4
+  speed: 3
   isFinalByte: 0
-  scoreValue: 100
+  scoreValue: 500
 --- !u!50 &7481476695799426408
 Rigidbody2D:
   serializedVersion: 4
@@ -193,12 +193,12 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.28, y: 1.28}
+    oldSize: {x: 2.56, y: 2.56}
     newSize: {x: 0.32, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.28, y: 1.28}
+  m_Size: {x: 2.56, y: 2.56}
   m_EdgeRadius: 0

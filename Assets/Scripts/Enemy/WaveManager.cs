@@ -61,13 +61,13 @@ public class WaveManager : MonoBehaviour
             player.GetComponent<PlayerController>().speed += 2;
             if (player.GetComponent<AttackScript>().cooldown > 0.2f)
                 player.GetComponent<AttackScript>().cooldown -= 0.2f;
-            camEndSize += 2;
+            camEndSize += 1.5f;
             yield return new WaitForSeconds(1f);
             byteSpawner.CamUpdate();
         }
         yield return new WaitForSeconds(3f);
         byteSpawner.canSpawn = true;
-        byteSpawner.spawnCount = 8 * curWave + Random.Range(1, 4) * curWave;
+        byteSpawner.spawnCount = 8 * curWave + (int)Mathf.Pow(curWave, Random.Range(3, 5));
         print("Spawning " + byteSpawner.spawnCount + " enemies");
         curWave++;
         Invoke("WaveDelay", 5f);
