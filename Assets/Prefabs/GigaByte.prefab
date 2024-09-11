@@ -101,8 +101,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bloodEffect: {fileID: 2616322758698598702, guid: f97a9041502704bb5a59908ddf8542a5, type: 3}
-  byte0Sprite: {fileID: 21300000, guid: 0b75b792a18ff86458789d8681d22178, type: 3}
-  byte1Sprite: {fileID: 21300000, guid: 0b75b792a18ff86458789d8681d22178, type: 3}
+  byte0Sprite: {fileID: 21300000, guid: fafdd9499738cc24fa5e5a1720593bc4, type: 3}
+  byte1Sprite: {fileID: 21300000, guid: fafdd9499738cc24fa5e5a1720593bc4, type: 3}
   health: 8
   byteDead: {fileID: 8300000, guid: beba9d7e2f6e0324d8eb632d92d8aea8, type: 3}
   damage: 4
@@ -121,7 +121,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 4
   m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 0

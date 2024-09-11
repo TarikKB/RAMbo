@@ -18,7 +18,7 @@ public class ByteSpawner : MonoBehaviour
 
     public GameObject pointPrefab;
 
-    public int spawnRate = 1;
+    public float spawnRate = 1;
     public int spawnCount = 0;
 
     public bool canSpawn = false;
@@ -99,12 +99,9 @@ public class ByteSpawner : MonoBehaviour
         if (canSpawn && byteCount < spawnCount) {
             
             canSpawn = false;
-            if (byteCount % 8 == waveManager.curWave % 8 && waveManager.curWave > 6) {
-                SpawnMegaByte();
-            } else {
-                SpawnByte();
-            }
-            if (byteCount % 4 == waveManager.curWave % 4 && waveManager.curWave > 3) {
+            if (byteCount % 16 == waveManager.curWave % 16 && waveManager.curWave > 6) {
+                SpawnGigaByte();
+            } else if (byteCount % 8 == waveManager.curWave % 8 && waveManager.curWave > 3) {
                 SpawnMegaByte();
             } else {
                 SpawnByte();

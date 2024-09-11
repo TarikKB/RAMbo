@@ -6,6 +6,7 @@ using UnityEngine;
 public class DirectorScript : MonoBehaviour
 {
 
+    [Header("Opening Panel")]
     public TextMeshProUGUI openingText;
 
     public GameObject openingPanel;
@@ -14,6 +15,8 @@ public class DirectorScript : MonoBehaviour
     public float typingSpeed = 0.1f;
 
     public AudioClip typingSound;
+
+    [Header("External GameObjects")]
 
     public AudioManager audioManager;
 
@@ -27,9 +30,12 @@ public class DirectorScript : MonoBehaviour
 
     public GameObject pauseMenu;
 
+    private int highScore;
+
     // Start is called before the first frame update
     void Start()
     {
+        highScore = PlayerPrefs.GetInt("HighScore", 0);
         if (firstLaunch)
         {
             openingPanel.SetActive(true);
@@ -41,6 +47,7 @@ public class DirectorScript : MonoBehaviour
             firstLaunch = false;
         } else
         {
+            print("STARTING GAME");
             StartGame();
         }
         
@@ -65,6 +72,10 @@ public class DirectorScript : MonoBehaviour
         byteSpawner.SetActive(true);
         Destroy(openingPanel);
         audioManager.StartOpening();
+    }
+
+    public void QuitGame() {
+        Application.Quit();
     }
 
     void Update()
@@ -102,12 +113,22 @@ public class DirectorScript : MonoBehaviour
 
     public void MainMenu()
     {
+        StopAllCoroutines();
+        WaveManager.enemies.Clear();
+        byteSpawner.GetComponent<ByteSpawner>().spawnCount = 0;
+        byteSpawner.GetComponent<WaveManager>().awaitingWave = false;
+        byteSpawner.GetComponent<WaveManager>().curWave = 1;
         Time.timeScale = 1;
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
     
     public void Restart()
     {
+        StopAllCoroutines();
+        WaveManager.enemies.Clear();
+        byteSpawner.GetComponent<ByteSpawner>().spawnCount = 0;
+        byteSpawner.GetComponent<WaveManager>().awaitingWave = false;
+        byteSpawner.GetComponent<WaveManager>().curWave = 1;
         Time.timeScale = 1;
         UnityEngine.SceneManagement.SceneManager.LoadScene(1);
     }

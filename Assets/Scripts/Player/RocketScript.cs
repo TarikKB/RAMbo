@@ -49,7 +49,7 @@ public class RocketScript : MonoBehaviour
     void DestroySelf()
     {
         AudioManager.PlaySound(explosionSound, transform.position);
-        Camera.main.GetComponent<CameraShake>().StartShake(0.2f, 0.2f);
+        Camera.main.GetComponent<CameraShake>().StartShake(0.1f, 0.1f);
         GameObject explosionEffect = Instantiate(explosion, gameObject.transform);
         explosionEffect.transform.parent = null;
         Destroy(gameObject);
