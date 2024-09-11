@@ -26,7 +26,7 @@ public class UpgradeManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //PlayerPrefs.SetInt("TotalMemory", 10000);
+        PlayerPrefs.SetInt("TotalMemory", 10000);
         totalMemory = PlayerPrefs.GetInt("TotalMemory", 0);
         totalMemText.text = "MEMORY: " + totalMemory;
         dashLevel = PlayerPrefs.GetInt("dashLevel", 0);

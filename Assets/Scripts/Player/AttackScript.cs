@@ -21,6 +21,7 @@ public class AttackScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        damage = PlayerPrefs.GetInt("damageLevel", 0) + 1;
         
     }
 

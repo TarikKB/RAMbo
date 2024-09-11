@@ -1602,6 +1602,7 @@ MonoBehaviour:
   deathScreen: {fileID: 1854431534}
   dashCooldown: 1
   canDash: 1
+  dashParticles: {fileID: 2616322758698598702, guid: 86c5470243b6949cab18a7fea5ae88f8, type: 3}
 --- !u!50 &725778806
 Rigidbody2D:
   serializedVersion: 4
