@@ -28,15 +28,23 @@ public class PlayerController : MonoBehaviour
     public UnityEngine.UI.Image[] hearts;
     public AudioClip playerHit;
 
+    public GameObject deathParticles;
+
     public GameObject deathScreen;
     private bool canTakeDamage = true;
 
     private Vector2 moveDirection;
+
+    [Header("Dash")]
+    private float dashDist;
+    public float dashCooldown = 1f;
+    public bool canDash = true;
     // Start is called before the first frame update
     
     
     void Start()
     {
+        dashDist = PlayerPrefs.GetInt("dashLevel", 0);
         cam = Camera.main;
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
@@ -48,6 +56,14 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         ProcessInputs();
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        {
+            print("DASHING");
+            canDash = false;
+            Dash();
+            Invoke("ResetDash", dashCooldown);
+
+        }
     }
     void FixedUpdate()
     {
@@ -66,9 +82,26 @@ public class PlayerController : MonoBehaviour
             rocketLauncher.transform.position = new Vector3(rocketLauncher.transform.position.x, rocketLauncher.transform.position.y, 1f);
         }
 
+        
+        
         Move();
         
         
+        
+        
+    }
+
+    void Dash() {
+        if (transform.position.x + moveDirection.x * dashDist > cam.orthographicSize || transform.position.x + moveDirection.x * dashDist < -cam.orthographicSize || transform.position.y + moveDirection.y * dashDist > cam.orthographicSize || transform.position.y + moveDirection.y * dashDist < -cam.orthographicSize)
+        {
+            return;
+        }
+        transform.position = new Vector2(transform.position.x + moveDirection.x * dashDist, transform.position.y + moveDirection.y * dashDist);
+
+    }
+
+    void ResetDash() {
+        canDash = true; 
     }
 
     void ProcessInputs() {
@@ -115,6 +148,8 @@ public class PlayerController : MonoBehaviour
 			health -= damage;
 			if (health <= 0)
 			{
+                GameObject tmp = Instantiate(deathParticles, transform.position, Quaternion.identity);
+                tmp.transform.parent = null;
                 Time.timeScale = 0.5f;
                 deathScreen.SetActive(true);
 				DestroySelf();

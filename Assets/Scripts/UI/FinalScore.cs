@@ -7,10 +7,17 @@ public class FinalScore : MonoBehaviour
 {
     private TextMeshProUGUI finalScoreText;
 
-    private TextMeshProUGUI highScoreText;
+    public TextMeshProUGUI highScoreText;
     // Start is called before the first frame update
     void Start()
     {
+        print("Final Score: " + ScoreManager.score);
+        int totalMemory = PlayerPrefs.GetInt("TotalMemory", 0);
+        print("Total Memory: " + totalMemory);
+        totalMemory += ScoreManager.score;
+        print("Total Memory: " + totalMemory);
+        PlayerPrefs.SetInt("TotalMemory", totalMemory);
+        print("Total Memory: " + PlayerPrefs.GetInt("TotalMemory", 0));
         finalScoreText = GetComponent<TextMeshProUGUI>();
         finalScoreText.text = "SCORE: " + ScoreManager.score;
         if (ScoreManager.score > PlayerPrefs.GetInt("HighScore", 0)) {
