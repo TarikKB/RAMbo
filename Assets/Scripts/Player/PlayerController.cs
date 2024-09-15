@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -39,37 +40,33 @@ public class PlayerController : MonoBehaviour
     private float dashDist;
     public float dashCooldown = 1f;
     public bool canDash = true;
-
     public GameObject dashParticles;
+    private TrailRenderer trail;
+    public AudioClip dashSound;
+
+    public Gradient trailColor;
     // Start is called before the first frame update
-    
-    
+
+
     void Start()
     {
         dashDist = PlayerPrefs.GetInt("dashLevel", 0);
-        speed =  6 + PlayerPrefs.GetInt("speedLevel", 0);
+        speed = 6 + PlayerPrefs.GetInt("speedLevel", 0);
         health = 6 + PlayerPrefs.GetInt("hpLevel", 0);
         numOfHearts = (int)health;
-        
+
         cam = Camera.main;
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animation>();
+        trail = GetComponent<TrailRenderer>();
         UpdateHealth();
-        
+
     }
 
     void Update()
     {
         ProcessInputs();
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
-        {
-            print("DASHING");
-            canDash = false;
-            Dash();
-            Invoke("ResetDash", dashCooldown);
-
-        }
     }
     void FixedUpdate()
     {
@@ -84,78 +81,103 @@ public class PlayerController : MonoBehaviour
             transform.Rotate(180f, 0f, 0f);
             rocketLauncher.transform.position = new Vector3(rocketLauncher.transform.position.x, rocketLauncher.transform.position.y, 1f);
 
-        } else {
+        }
+        else
+        {
             rocketLauncher.transform.position = new Vector3(rocketLauncher.transform.position.x, rocketLauncher.transform.position.y, 1f);
         }
 
-        
-        
+
+
         Move();
-        
-        
-        
-        
+
+
+
+
     }
 
-    void Dash() {
+    void Dash()
+    {
+        print("DASHING");
+        canDash = false;
+        Invoke("ResetDash", dashCooldown);
+        //Invoke("DisableTrail", 1f);
         if (PlayerPrefs.GetInt("dashLevel", 0) == 0)
             return;
+
         GameObject tmp = Instantiate(dashParticles, transform.position, Quaternion.identity);
+        //trail.colorGradient = trailColor;
         tmp.transform.parent = null;
         float dashDirX = 0;
         float dashDirY = 0;
-        Vector3 mousePos = (Vector2)cam.ScreenToWorldPoint(Input.mousePosition).normalized;
+        Vector2 mousePos = ((Vector2)cam.ScreenToWorldPoint(Input.mousePosition) - (Vector2)transform.position).normalized;
         if (Mathf.Abs(moveDirection.x) < 0.1f && Mathf.Abs(moveDirection.y) < 0.1f)
         {
-            
+
             dashDirX = mousePos.x;
             dashDirY = mousePos.y;
-            
-        } else {
+
+        }
+        else
+        {
             dashDirX = moveDirection.x;
             dashDirY = moveDirection.y;
         }
+        AudioManager.PlaySound(dashSound, transform.position, "Player");
         if (transform.position.x + dashDirX * dashDist > cam.orthographicSize * cam.aspect || transform.position.x + dashDirX * dashDist < -(cam.orthographicSize * cam.aspect) || transform.position.y + dashDirY * dashDist > cam.orthographicSize || transform.position.y + dashDirY * dashDist < -cam.orthographicSize)
         {
             float wallDistX = cam.aspect * cam.orthographicSize - Mathf.Abs(transform.position.x);
             float wallDistY = cam.orthographicSize - Mathf.Abs(transform.position.y);
-            if (wallDistX < wallDistY)
-            {
-                transform.position = new Vector2(transform.position.x + dashDirX * wallDistX, transform.position.y + dashDirY * dashDist);
-                return;
-            } else {
-                transform.position = new Vector2(transform.position.x + dashDirX * dashDist, transform.position.y + dashDirY * wallDistY);
-                return;
-            }
+            transform.DOMove(new Vector2(transform.position.x + dashDirX * dashDist, transform.position.y + dashDirY * wallDistY), 0.01f);
+            return;
         }
-        transform.position = new Vector2(transform.position.x + dashDirX * dashDist, transform.position.y + dashDirY * dashDist);
+        transform.DOMove(new Vector2(transform.position.x + dashDirX * dashDist, transform.position.y + dashDirY * dashDist), 0.01f);
 
     }
-
-    void ResetDash() {
-        canDash = true; 
+    
+    void ResetDash()
+    {
+        canDash = true;
     }
 
-    void ProcessInputs() {
+    void DisableTrail()
+    {
+        trail.colorGradient = new Gradient();
+        trail.endColor = Color.clear;
+        trail.startColor = Color.clear;
+    }
+
+    void ProcessInputs()
+    {
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
         moveDirection = new Vector2(moveX, moveY).normalized;
-    }
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        {
 
-    void Move() {
+            Dash();
+
+        }
+    }
+    void Move()
+    {
         rb.velocity = new Vector2(moveDirection.x * speed, moveDirection.y * speed);
     }
 
-    void UpdateHealth() {
+    void UpdateHealth()
+    {
         if (health >= numOfHearts)
         {
             health = numOfHearts;
         }
         for (int i = 0; i < hearts.Length; i++)
         {
-            if (i < health) {
+            if (i < health)
+            {
                 hearts[i].sprite = fullHeart;
-            } else {
+            }
+            else
+            {
                 hearts[i].sprite = emptyHeart;
             }
             if (i < numOfHearts)
@@ -174,23 +196,23 @@ public class PlayerController : MonoBehaviour
     {
         if (canTakeDamage)
         {
-            AudioManager.PlaySound(playerHit, transform.position);
-			canTakeDamage = false;
-			anim.Play();
-			health -= damage;
-			if (health <= 0)
-			{
+            AudioManager.PlaySound(playerHit, transform.position, "Player");
+            canTakeDamage = false;
+            anim.Play();
+            health -= damage;
+            if (health <= 0)
+            {
                 GameObject tmp = Instantiate(deathParticles, transform.position, Quaternion.identity);
                 tmp.transform.parent = null;
                 Time.timeScale = 0.5f;
                 deathScreen.SetActive(true);
-				DestroySelf();
-			}
-			Invoke("IFrames", 0.5f);
+                DestroySelf();
+            }
+            Invoke("IFrames", 0.5f);
             UpdateHealth();
 
-		}
-        
+        }
+
     }
 
     private void IFrames()
@@ -198,7 +220,8 @@ public class PlayerController : MonoBehaviour
         canTakeDamage = true;
     }
 
-    void DestroySelf() {
+    void DestroySelf()
+    {
         Destroy(gameObject);
     }
 }

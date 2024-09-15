@@ -58,12 +58,14 @@ public class DirectorScript : MonoBehaviour
     public void Pause() {
         pauseMenu.SetActive(true);
         Time.timeScale = 0;
+        audioManager.GetComponent<AudioSource>().Pause();
         gameIsPaused = true;
         
     }
 
     public void Resume() {
         pauseMenu.SetActive(false);
+        audioManager.GetComponent<AudioSource>().UnPause();
         Time.timeScale = 1;
         gameIsPaused = false;
     }
