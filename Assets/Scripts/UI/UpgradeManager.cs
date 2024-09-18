@@ -73,6 +73,20 @@ public class UpgradeManager : MonoBehaviour
     }
 
     public void ResetUpgrades() {
+        int refundedPoints = 0;
+        for (int i = 0; i < dashLevel; i++) {
+            refundedPoints += 1000 * (int)Mathf.Pow(2, i);
+        }
+        for (int i = 0; i < hpLevel; i++) {
+            refundedPoints += 1000 * (int)Mathf.Pow(2, i);
+        }
+        for (int i = 0; i < damageLevel; i++) {
+            refundedPoints += 1000 * (int)Mathf.Pow(2, i);
+        }
+        for (int i = 0; i < speedLevel; i++) {
+            refundedPoints += 1000 * (int)Mathf.Pow(2, i);
+        }
+
         PlayerPrefs.SetInt("dashLevel", 0);
         dashLevel = 0;
         PlayerPrefs.SetInt("hpLevel", 0);
@@ -82,6 +96,9 @@ public class UpgradeManager : MonoBehaviour
         PlayerPrefs.SetInt("speedLevel", 0);
         speedLevel = 0;
         SetLevels();
+        totalMemory += refundedPoints;
+        PlayerPrefs.SetInt("TotalMemory", totalMemory);
+        totalMemText.text = "MEMORY: " + totalMemory;
     }
 
     public void UpgradeDash() {
