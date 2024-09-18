@@ -111,12 +111,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 6906166945008995472}
     m_Modifications:
     - target: {fileID: 408098159059539839, guid: 93f0520f5d5bf6f44891a399eeec9b5f, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 408098159059539839, guid: 93f0520f5d5bf6f44891a399eeec9b5f, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4160814899
+      value: 4278255411
+      objectReference: {fileID: 0}
+    - target: {fileID: 1775137321217981199, guid: 93f0520f5d5bf6f44891a399eeec9b5f, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1775137321217981199, guid: 93f0520f5d5bf6f44891a399eeec9b5f, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4160814899
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 6397841422088194455, guid: 93f0520f5d5bf6f44891a399eeec9b5f, type: 3}
       propertyPath: m_Pivot.x

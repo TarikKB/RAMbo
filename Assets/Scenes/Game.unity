@@ -438,6 +438,8 @@ MonoBehaviour:
   openingMusic: {fileID: 8300000, guid: 74e712a178ab9f149be08e4c32ee4739, type: 3}
   musicLoop: {fileID: 8300000, guid: 5719b6c41a9c30a4bb4693ef761cbaa3, type: 3}
   byteDead: {fileID: 8300000, guid: beba9d7e2f6e0324d8eb632d92d8aea8, type: 3}
+  musicSlider: {fileID: 1821420985}
+  sfxSlider: {fileID: 1438758486}
 --- !u!1 &103495278
 GameObject:
   m_ObjectHideFlags: 0

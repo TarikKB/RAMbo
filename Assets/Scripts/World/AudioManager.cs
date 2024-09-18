@@ -18,6 +18,10 @@ public class AudioManager : MonoBehaviour
 
     public AudioClip byteDead;
 
+    public Slider musicSlider;
+
+    public Slider sfxSlider;
+
     private AudioSource audioSource;
 
     
@@ -51,6 +55,8 @@ public class AudioManager : MonoBehaviour
         sfx.audioMixer.SetFloat("SFXVolume", sfxVolume);
         player.audioMixer.SetFloat("PlayerVolume", sfxVolume);
         music.audioMixer.SetFloat("MusicVolume", musicVolume);
+        musicSlider.value = musicVolume;
+        sfxSlider.value = sfxVolume;
         
         
         
