@@ -66,7 +66,7 @@ public class EnemyScript : MonoBehaviour
         AudioManager.PlaySound(byteDead, transform.position);
         GameObject tmp = Instantiate(bloodEffect, gameObject.transform);
         tmp.transform.parent = null;
-        ScoreManager.AddScore(10);
+        ScoreManager.AddScore(scoreValue);
         WaveManager.enemies.Remove(gameObject);
         Destroy(gameObject);
     }
